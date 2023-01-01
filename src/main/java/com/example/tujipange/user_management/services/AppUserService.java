@@ -1,5 +1,7 @@
 package com.example.tujipange.user_management.services;
 
+import com.example.tujipange.user_management.dto.AppUserDto;
+import com.example.tujipange.user_management.models.AppUser;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,4 +12,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface AppUserService {
+    AppUser createAccountUserAccount(AppUserDto appUserDto);
 }

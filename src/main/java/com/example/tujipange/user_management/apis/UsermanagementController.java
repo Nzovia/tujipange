@@ -1,5 +1,11 @@
 package com.example.tujipange.user_management.apis;
 
+import com.example.tujipange.user_management.dto.AppUserDto;
+import com.example.tujipange.user_management.models.AppUser;
+import com.example.tujipange.user_management.services.AppUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -11,7 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UsermanagementController {
 
-    public String createAccount(){
+    @Autowired
+    private AppUserService appUserService;
+
+    @PostMapping("/register")
+    public String createAccount(@RequestBody AppUserDto appUserDto){
+        AppUser appUser = appUserService.createAccountUserAccount(appUserDto);
         return "";
     }
 }
