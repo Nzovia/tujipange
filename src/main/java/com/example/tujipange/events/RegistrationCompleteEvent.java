@@ -1,6 +1,8 @@
 package com.example.tujipange.events;
 
 import com.example.tujipange.user_management.models.AppUser;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.context.ApplicationEvent;
 
 /**
@@ -8,6 +10,9 @@ import org.springframework.context.ApplicationEvent;
  * @Contact: https://github.com/Nzovia
  * @since 1/2/23
  */
+
+@Getter
+@Setter
 public class RegistrationCompleteEvent extends ApplicationEvent {
     private AppUser appUser;
     private String applicationUrl;

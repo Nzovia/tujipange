@@ -13,4 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface AppUserService {
     AppUser createAccountUserAccount(AppUserDto appUserDto);
+
+    void saveVerificationTokenForAppUser(AppUser appUser, String token);
 }
