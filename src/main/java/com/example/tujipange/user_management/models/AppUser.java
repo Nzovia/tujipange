@@ -1,17 +1,19 @@
 package com.example.tujipange.user_management.models;
 
-import com.example.tujipange.models.PO;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 @Table(name = "users")
-public class AppUser extends PO {
+public class AppUser {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     @Column(name = "f_name", nullable = false)
     private String firstName;
     @Column(name = "l_name", nullable = false)

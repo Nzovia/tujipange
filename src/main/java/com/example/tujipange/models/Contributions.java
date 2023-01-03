@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Contributions extends PO{
+public class Contributions {
     @Column(name = "f_name", nullable = false)
     private String transactionCode; //generated code
     private BigDecimal paidAmount;

@@ -1,8 +1,8 @@
 package com.example.tujipange.user_management.models;
 
-import com.example.tujipange.models.PO;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -15,16 +15,21 @@ import java.util.Date;
  */
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-public class VerificationToken extends PO {
+@Table(name = "verification_token")
+public class VerificationToken {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private static  final int EXPIRATION_TIME =10 ;
     private String token;
     private Date expirationTime;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(
-            name = "app_user_id",
+            name = "id",
             nullable = false,
             foreignKey = @ForeignKey(name = "FK_USER_VERIFY_TOKEN"))
     private AppUser appUser;

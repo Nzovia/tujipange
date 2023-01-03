@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Nzovia Maundu
  * @Contact: https://github.com/Nzovia
@@ -27,12 +29,17 @@ public class UsermanagementController {
     private ApplicationEventPublisher eventPublisher;
 
     @PostMapping("/register")
-    public String createAccount(@RequestBody AppUserDto appUserDto){
+    public String createAccount(@RequestBody AppUserDto appUserDto, final HttpServletRequest request){ //to get the context of the url you will need to use Http request
         AppUser appUser = appUserService.createAccountUserAccount(appUserDto);
         eventPublisher.publishEvent(new RegistrationCompleteEvent(
                 appUser,
-                "url"
+                applicationUrl(request)
         ));
         return "Account Created Successfully";
+    }
+
+    private String applicationUrl(HttpServletRequest request) {
+        return "http://" +
+                request.getServerName()+":"+request.getServerPort()+request.getContextPath();
     }
 }
