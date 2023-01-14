@@ -1,0 +1,14 @@
+/home/nzovia/devnic/backend_projects/tujipange/src/main/java/com/example/tujipange/user_management/models/AppUser.java
+/home/nzovia/devnic/backend_projects/tujipange/src/main/java/com/example/tujipange/events/listener/RegistrationEventCompleteListener.java
+/home/nzovia/devnic/backend_projects/tujipange/src/main/java/com/example/tujipange/user_management/repository/AppuserRepository.java
+/home/nzovia/devnic/backend_projects/tujipange/src/main/java/com/example/tujipange/user_management/services/AppUserImplService.java
+/home/nzovia/devnic/backend_projects/tujipange/src/main/java/com/example/tujipange/user_management/dto/AppUserDto.java
+/home/nzovia/devnic/backend_projects/tujipange/src/main/java/com/example/tujipange/security/WebSecurityConfig.java
+/home/nzovia/devnic/backend_projects/tujipange/src/main/java/com/example/tujipange/user_management/apis/UsermanagementController.java
+/home/nzovia/devnic/backend_projects/tujipange/src/main/java/com/example/tujipange/user_management/repository/VerificationTokenRepository.java
+/home/nzovia/devnic/backend_projects/tujipange/src/main/java/com/example/tujipange/models/ContributionsAccount.java
+/home/nzovia/devnic/backend_projects/tujipange/src/main/java/com/example/tujipange/TujipangeApplication.java
+/home/nzovia/devnic/backend_projects/tujipange/src/main/java/com/example/tujipange/models/Contributions.java
+/home/nzovia/devnic/backend_projects/tujipange/src/main/java/com/example/tujipange/user_management/models/VerificationToken.java
+/home/nzovia/devnic/backend_projects/tujipange/src/main/java/com/example/tujipange/user_management/services/AppUserService.java
+/home/nzovia/devnic/backend_projects/tujipange/src/main/java/com/example/tujipange/events/RegistrationCompleteEvent.java
