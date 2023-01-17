@@ -8,17 +8,25 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+/**
+ * @author Nzovia Maundu
+ * @Contact: https://github.com/Nzovia
+ * @since 1/14/23
+ */
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "member_contributions")
-public class Contributions {
+@Table
+public class Payments {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "f_name", nullable = false)
-    private String transactionCode; //generated code
-    private BigDecimal contributedAmount;
-    private BigDecimal pendingBalance;
+    private int id;
+    private String loanCode;
+    private BigDecimal amount;
+
+    //Todo: add a relation between the Payments and Loans
+    //Todo: add a relationship between users and payments
 }
