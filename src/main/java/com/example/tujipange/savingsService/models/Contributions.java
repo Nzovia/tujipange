@@ -1,5 +1,6 @@
 package com.example.tujipange.savingsService.models;
 
+import com.example.tujipange.user_management.models.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,9 @@ public class Contributions {
     private String transactionCode; //generated code
     private BigDecimal contributedAmount;
     private BigDecimal pendingBalance;
+
+    //many contributions are made by a single app user
+    @ManyToOne
+    @JoinColumn(name="appuser_id")
+    private AppUser appUser;
 }

@@ -1,9 +1,11 @@
 package com.example.tujipange.user_management.models;
 
 import com.example.tujipange.loanprocessing.models.Loan;
+import com.example.tujipange.savingsService.models.Contributions;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -32,4 +34,6 @@ public class AppUser {
     @ManyToOne
     @JoinColumn(name = "loan_id")
     private Loan loan;
+    @OneToMany(mappedBy = "appUser")
+    private Set<Contributions> contributions;
 }
