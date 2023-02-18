@@ -1,4 +1,4 @@
-package com.example.tujipange.models;
+package com.example.tujipange.savingsService.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

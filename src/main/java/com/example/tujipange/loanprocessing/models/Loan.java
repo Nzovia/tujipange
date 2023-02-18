@@ -1,5 +1,6 @@
 package com.example.tujipange.loanprocessing.models;
 
+import com.example.tujipange.user_management.models.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author Nzovia Maundu
@@ -32,8 +34,9 @@ public class Loan {
     private LocalDateTime dateBorrowed;
     private LocalDateTime dueDate;
 
+    //one Loan has many customers.
+    @OneToMany(mappedBy = "loan")
+    private List<AppUser> user;
 
 
-    //there is one to many relationship
-    //TODO. one Loan has many customers.
 }

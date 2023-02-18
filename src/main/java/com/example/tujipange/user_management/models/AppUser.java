@@ -1,5 +1,6 @@
 package com.example.tujipange.user_management.models;
 
+import com.example.tujipange.loanprocessing.models.Loan;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,4 +28,8 @@ public class AppUser {
     @Column(name ="user_role")
     private String role;
     private boolean enabled = false;
+
+    @ManyToOne
+    @JoinColumn(name = "loan_id")
+    private Loan loan;
 }
