@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -18,9 +19,15 @@ import java.math.BigDecimal;
 public class Contributions {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "f_name", nullable = false)
-    private String transactionCode; //generated code
+    @Column(name = "contribution_code", nullable = false)
+    private String contributionCode; //generated code
+    @Column(name = "contributed_amount")
     private BigDecimal contributedAmount;
+    @Column(name = "contribution_deadline")
+    private  LocalDateTime contributionDeadline;
+    @Column(name = "date_contributed")
+    private LocalDateTime contributionDate;
+    @Column(name = "current_balance")
     private BigDecimal pendingBalance;
 
     //many contributions are made by a single app user
