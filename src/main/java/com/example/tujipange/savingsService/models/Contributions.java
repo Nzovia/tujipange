@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -23,12 +23,15 @@ public class Contributions {
     private String contributionCode; //generated code
     @Column(name = "contributed_amount")
     private BigDecimal contributedAmount;
-    @Column(name = "contribution_deadline")
-    private  LocalDateTime contributionDeadline;
+
+//    @Column(name = "contribution_deadline")
+//    private  LocalDateTime contributionDeadline;
     @Column(name = "date_contributed")
-    private LocalDateTime contributionDate;
+    private LocalDate contributionDate;
     @Column(name = "current_balance")
     private BigDecimal pendingBalance;
+    @Column(name = "expected_amount")
+    private BigDecimal expectedAmount;
 
     //many contributions are made by a single app user
     @ManyToOne
