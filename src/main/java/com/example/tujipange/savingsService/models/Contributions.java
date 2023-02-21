@@ -18,7 +18,16 @@ import java.time.LocalDate;
 @Table(name = "member_contributions")
 public class Contributions {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "contribution_sequence",
+            sequenceName = "contribution_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "contribution_sequence"
+
+    )
     @Column(name = "contribution_code", nullable = false)
     private String contributionCode; //generated code
     @Column(name = "contributed_amount")
