@@ -12,7 +12,13 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "users")
+@Builder
+@Table(
+        name = "users",
+uniqueConstraints = @UniqueConstraint(
+//        name = {"unique_email","unique_phone"},
+        columnNames = {"email_address", "phone_number"}
+))
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +29,7 @@ public class AppUser {
     private String lastName;
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
-    @Column(name = "email_number", nullable = false)
+    @Column(name = "email_address", nullable = false)
     private String email;
     @Column(length = 60, name = "password")
     private String password;

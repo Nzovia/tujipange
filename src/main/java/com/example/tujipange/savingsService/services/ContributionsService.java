@@ -17,22 +17,26 @@ import java.time.LocalDate;
 @Service
 public class ContributionsService {
     private final ContributionRepository repository;
+
     public ContributionsService(ContributionRepository repository) {
         this.repository = repository;
     }
 
     public String makeContributions(MakeContributionsRequest request) {
-        Contributions contributed = new Contributions();
         var contributedAmount = request.getContributedAmount();
         var expectedAmount = 100;
+        Contributions contributed = Contributions.builder()
 
-        contributed.setContributionCode("MakeRandomUniqueString");
-        contributed.setContributedAmount(contributedAmount);
-        contributed.setContributionDate(LocalDate.now());
-        contributed.setPendingBalance(contributedAmount.subtract(BigDecimal.valueOf(expectedAmount)));
+
+                .contributionCode("MakeRandomUniqueString")
+                .contributedAmount(request.getContributedAmount())
+                .contributionDate(LocalDate.now())
+                .pendingBalance(contributedAmount.subtract(BigDecimal.valueOf(expectedAmount)))
+                        .build();
+
 
         repository.save(contributed);
 
-        return "records added successfully" ;
+        return "records added successfully";
     }
 }

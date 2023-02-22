@@ -1,10 +1,7 @@
 package com.example.tujipange.savingsService.models;
 
 import com.example.tujipange.user_management.models.AppUser;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,7 +12,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "member_contributions")
+@Builder
+@Table(
+        name = "member_contributions",
+        uniqueConstraints = @UniqueConstraint(
+                name = "unique_contributioncode",
+                columnNames = "contribution_code"
+        )
+)
 public class Contributions {
     @Id
     @SequenceGenerator(
