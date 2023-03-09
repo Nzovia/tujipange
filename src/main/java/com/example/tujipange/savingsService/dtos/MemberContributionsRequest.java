@@ -1,4 +1,4 @@
-package com.example.tujipange.savingsService.controllers.requests;
+package com.example.tujipange.savingsService.dtos;
 
 import lombok.Data;
 

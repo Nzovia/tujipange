@@ -42,7 +42,7 @@ public class Contributions {
 //    @Column(name = "contribution_deadline")
 //    private  LocalDateTime contributionDeadline;
     @Column(name = "date_contributed")
-    @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
+    @JsonFormat(pattern = "YYYY-MM-dd")
     private LocalDate contributionDate;
     @Column(name = "current_balance")
     private BigDecimal pendingBalance;

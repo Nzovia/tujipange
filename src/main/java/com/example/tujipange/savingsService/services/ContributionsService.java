@@ -1,6 +1,6 @@
 package com.example.tujipange.savingsService.services;
 
-import com.example.tujipange.savingsService.controllers.requests.MemberContributionsRequest;
+import com.example.tujipange.savingsService.dtos.MemberContributionsRequest;
 import com.example.tujipange.savingsService.models.Contributions;
 import com.example.tujipange.savingsService.repository.ContributionRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -21,6 +22,7 @@ import java.util.Objects;
 public class ContributionsService {
     private final ContributionRepository repository;
 
+    //members making their contributions
     public ContributionsService(ContributionRepository repository) {
         this.repository = repository;
     }
@@ -35,7 +37,8 @@ public class ContributionsService {
         var expectedAmount = 100;
         Contributions contributed = Contributions.builder()
 
-                .contributionCode("MakeRandomUniqueString")
+                .contributionCode(request.getContributionCode())
+                .expectedAmount(BigDecimal.valueOf(expectedAmount))
                 .contributedAmount(contributedAmount)
                 .contributionDate(LocalDate.now())
                 .pendingBalance(contributedAmount.subtract(BigDecimal.valueOf(expectedAmount)))
@@ -46,5 +49,10 @@ public class ContributionsService {
         repository.save(contributed);
 
         return "records added successfully";
+    }
+
+    public List<Contributions> getAllMemberContributions() {
+        var contributions = repository.findAll();
+        return contributions;
     }
 }
