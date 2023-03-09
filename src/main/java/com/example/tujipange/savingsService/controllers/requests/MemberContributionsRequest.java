@@ -12,13 +12,11 @@ import java.time.LocalDateTime;
  */
 
 @Data
-public class MakeContributionsRequest {
-
-    private Long userReferenceId;
+public class MemberContributionsRequest {
+    private Long userReferenceId = 1L;
     private String contributionCode;
     private BigDecimal contributedAmount;
     private LocalDateTime contributionDate;
-    private LocalDateTime contributionDeadline;
-
+    //private LocalDateTime contributionDeadline;
 
 }

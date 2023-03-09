@@ -6,7 +6,6 @@ import com.example.tujipange.user_management.models.VerificationToken;
 import com.example.tujipange.user_management.repository.AppuserRepository;
 import com.example.tujipange.user_management.repository.VerificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,8 +18,8 @@ import org.springframework.stereotype.Service;
 public class AppUserImplService implements AppUserService{
     @Autowired
     private AppuserRepository appuserRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
     @Autowired
     private VerificationTokenRepository verificationTokenRepository;
     @Override
@@ -30,8 +29,8 @@ public class AppUserImplService implements AppUserService{
         appUser.setLastName(appUserDto.getLastName());
         appUser.setPhoneNumber(appUserDto.getPhoneNumber());
         appUser.setEmail(appUserDto.getEmail());
-        appUser.setRole("USER");
-        appUser.setPassword(passwordEncoder.encode(appUserDto.getPassword()));
+//        appUser.setRole("USER");
+//        appUser.setPassword(passwordEncoder.encode(appUserDto.getPassword()));
 
         //validating password
         appuserRepository.save(appUser);

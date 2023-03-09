@@ -1,13 +1,13 @@
 package com.example.tujipange.savingsService.controllers;
 
-import com.example.tujipange.savingsService.controllers.requests.MakeContributionsRequest;
+import com.example.tujipange.savingsService.controllers.requests.MemberContributionsRequest;
+import com.example.tujipange.savingsService.models.Contributions;
 import com.example.tujipange.savingsService.services.ContributionsService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/contributions")
 public class ContributionsController {
     private final ContributionsService contributionsService;
     public ContributionsController(ContributionsService contributionsService) {
@@ -16,9 +16,9 @@ public class ContributionsController {
 
     //make contributions
     @PostMapping
-    public void makeContributions(MakeContributionsRequest request){
+    @ResponseStatus(HttpStatus.OK)
+    public void makeContributions(@RequestBody MemberContributionsRequest request){
         contributionsService.makeContributions(request);
-
     }
 
     //update contributions

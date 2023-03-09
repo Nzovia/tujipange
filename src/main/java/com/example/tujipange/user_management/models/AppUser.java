@@ -24,13 +24,13 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "f_name", nullable = false)
-    private String firstName;
+    private String firstName = "Nicholas";
     @Column(name = "l_name", nullable = false)
-    private String lastName;
+    private String lastName = "Maundu";
     @Column(name = "phone_number", nullable = false)
-    private String phoneNumber;
+    private String phoneNumber = "0796182814";
     @Column(name = "email_address", nullable = false)
-    private String email;
+    private String email = "nickiemaundu@gmail.com";
     @Column(length = 60, name = "password")
     private String password;
     @Column(name ="user_role")
