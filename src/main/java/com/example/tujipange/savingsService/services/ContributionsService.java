@@ -3,6 +3,7 @@ package com.example.tujipange.savingsService.services;
 import com.example.tujipange.savingsService.dtos.MemberContributionsRequest;
 import com.example.tujipange.savingsService.models.Contributions;
 import com.example.tujipange.savingsService.repository.ContributionRepository;
+import com.sun.xml.bind.v2.TODO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,7 @@ public class ContributionsService {
         this.repository = repository;
     }
 
-    public String makeContributions(MemberContributionsRequest request) {
+    public void makeContributions(MemberContributionsRequest request) {
         var contributedAmount = request.getContributedAmount();
 
         if(Objects.equals(contributedAmount, new BigDecimal(0))){
@@ -45,10 +46,13 @@ public class ContributionsService {
                         .build();
         log.info("can't get the value {}",String.valueOf(contributed));
 
-
         repository.save(contributed);
 
-        return "records added successfully";
+        log.info("savings with code {} added successfully ", request.getContributionCode());
+
+        //TODO: here call the savings method and the merry-go round...
+        // savings account goes to the savings till while
+        // merrygo the contributions goes to savings tillnumber(PayBill)
     }
 
     public List<Contributions> getAllMemberContributions() {

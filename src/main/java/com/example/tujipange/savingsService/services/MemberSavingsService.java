@@ -3,6 +3,7 @@ package com.example.tujipange.savingsService.services;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,19 +14,7 @@ import java.math.BigDecimal;
  * @Contact: itsdevelopernic22@gmail.com
  */
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-@Table(name = "member_savings")
+@Service
 public class MemberSavingsService {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    private String memberName;
-    @Column(name = "contribution_code", unique = true)
-    private String contributionCode;
-    @Column(name = "phone_number")
-    private String memberPhoneNumber;
-    @Column(name = "amount")
-    private BigDecimal savingsAmount;
+
 }
