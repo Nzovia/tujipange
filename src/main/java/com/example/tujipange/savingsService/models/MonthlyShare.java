@@ -18,6 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Entity
 @Table(name = "merry_go_round")
 public class MonthlyShare {
     @Id
