@@ -25,9 +25,9 @@ public class MonthlyShare {
     private long id;
     @Column(name = "contribution_code", unique = true)
     private String contributionCode;
-    @Column(name = "savings_amount")
+    @Column(name = "share_amount")
     private BigDecimal savingsAmount;
-    @Column(name = "savings_date")
+    @Column(name = "share_date")
     private LocalDate contributionsDate;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id") //means many savings to one user
