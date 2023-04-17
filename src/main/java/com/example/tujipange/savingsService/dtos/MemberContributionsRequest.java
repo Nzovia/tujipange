@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @Data
 public class MemberContributionsRequest {
     private Long userReferenceId = 1L;
-    private String contributionCode; // should be a random value
     private BigDecimal contributedAmount;
     private LocalDateTime contributionDate;
     //private LocalDateTime contributionDeadline;

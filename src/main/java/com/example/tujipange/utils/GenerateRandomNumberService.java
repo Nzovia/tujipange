@@ -1,5 +1,7 @@
 package com.example.tujipange.utils;
 
+import org.springframework.stereotype.Component;
+
 import java.util.UUID;
 
 import static com.example.tujipange.utils.GetFirstCharacterDayAndCurrentMonth.getCurrentDayAndMonth;
@@ -10,6 +12,7 @@ import static com.example.tujipange.utils.GetFirstCharacterDayAndCurrentMonth.ge
  * @Contact: itsdevelopernic22@gmail.com
  */
 
+@Component
 public class GenerateRandomNumberService {
     public  String generateRandomNumber(){
         var randomNumber = UUID.randomUUID().toString();

@@ -3,7 +3,7 @@ package com.example.tujipange.savingsService.services;
 import com.example.tujipange.savingsService.dtos.MemberContributionsRequest;
 import com.example.tujipange.savingsService.models.Contributions;
 import com.example.tujipange.savingsService.repository.ContributionRepository;
-import com.sun.xml.bind.v2.TODO;
+import com.example.tujipange.utils.GenerateRandomNumberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +22,12 @@ import java.util.Objects;
 @Slf4j
 public class ContributionsService {
     private final ContributionRepository repository;
+    private final GenerateRandomNumberService generateRandomNumberService;
 
     //members making their contributions
-    public ContributionsService(ContributionRepository repository) {
+    public ContributionsService(ContributionRepository repository, GenerateRandomNumberService generateRandomNumberService) {
         this.repository = repository;
+        this.generateRandomNumberService = generateRandomNumberService;
     }
 
     public void makeContributions(MemberContributionsRequest request) {
@@ -36,9 +38,10 @@ public class ContributionsService {
         }
 
         var expectedAmount = 100;
+        var contributionCode = "Cn"+ generateRandomNumberService.generateRandomNumber();
         Contributions contributed = Contributions.builder()
 
-                .contributionCode(request.getContributionCode())
+                .contributionCode(contributionCode)
                 .expectedAmount(BigDecimal.valueOf(expectedAmount))
                 .contributedAmount(contributedAmount)
                 .contributionDate(LocalDate.now())
@@ -48,7 +51,7 @@ public class ContributionsService {
 
         repository.save(contributed);
 
-        log.info("savings with code {} added successfully ", request.getContributionCode());
+        log.info("savings with code {} added successfully ", contributionCode);
 
         //TODO: here call the savings method and the merry-go round...
         // savings account goes to the savings till while
