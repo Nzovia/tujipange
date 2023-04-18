@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @Data
 public class MemberContributionsRequest {
     private Long userReferenceId = 1L;
+    private String memberIdNumber;
     private BigDecimal contributedAmount;
     private LocalDateTime contributionDate;
     //private LocalDateTime contributionDeadline;

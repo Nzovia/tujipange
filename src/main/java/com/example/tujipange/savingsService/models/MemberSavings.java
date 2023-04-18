@@ -24,6 +24,8 @@ public class MemberSavings {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column(name = "member_number", unique = true)
+    private String memberIdNumber;; //unique code that identifies members
     @Column(name = "contribution_code", unique = true)
     private String contributionCode;
     @Column(name = "savings_amount")

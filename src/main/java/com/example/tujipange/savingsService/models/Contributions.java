@@ -34,7 +34,8 @@ public class Contributions {
 
     )
     private Long id;
-
+    @Column(name = "member_number", nullable = false, unique = true)
+    private String memberIdNumber;
     @Column(name = "contribution_code", nullable = false)
     private String contributionCode; //generated code
     @Column(name = "contributed_amount")

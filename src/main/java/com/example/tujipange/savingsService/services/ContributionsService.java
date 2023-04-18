@@ -37,7 +37,7 @@ public class ContributionsService {
             log.error("the contributed amount is null {}", contributedAmount);
         }
 
-        var expectedAmount = 100;
+        var expectedAmount = 500; //The value will be gotten from admin table
         var contributionCode = "Cn"+ generateRandomNumberService.generateRandomNumber();
         Contributions contributed = Contributions.builder()
 
@@ -49,13 +49,17 @@ public class ContributionsService {
                         .build();
         log.info("can't get the value {}",String.valueOf(contributed));
 
-        repository.save(contributed);
+        repository.saveAndFlush(contributed);
 
         log.info("savings with code {} added successfully ", contributionCode);
 
         //TODO: here call the savings method and the merry-go round...
         // savings account goes to the savings till while
         // merrygo the contributions goes to savings tillnumber(PayBill)
+
+
+        //after contributions call savings service...
+
     }
 
     public List<Contributions> getAllMemberContributions() {

@@ -38,5 +38,7 @@ public class MemberSavingsService {
                 .savingsDate(LocalDate.now())
                 .build();
 
+        memberSavingsRepository.save(memberSavings);
+
     }
 }

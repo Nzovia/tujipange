@@ -17,9 +17,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Data
 public class MemberSavingsDto {
-    private String memberName;
+    private String memberRefNumber;
     private String contributionCode;
     private String contributionDate;
-    private String memberPhoneNumber;
     private BigDecimal savingsAmount;
 }
