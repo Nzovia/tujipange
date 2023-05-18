@@ -59,9 +59,7 @@ public class MemberSavingsService {
                 .build();
 
         memberSavingsRepository.save(memberSavings);
-
         //Return balance
         return BigDecimal.ZERO;
-
     }
 }

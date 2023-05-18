@@ -12,5 +12,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AppuserRepository extends JpaRepository<AppUser, Long> {
-
+    boolean existsByEmail(String email);
+    boolean existsByPhoneNumber(String phoneNumber);
 }

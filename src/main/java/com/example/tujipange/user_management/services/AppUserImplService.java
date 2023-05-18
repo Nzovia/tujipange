@@ -24,18 +24,31 @@ public class AppUserImplService implements AppUserService{
     private VerificationTokenRepository verificationTokenRepository;
     @Override
     public AppUser createAccountUserAccount(AppUserDto appUserDto) {
+
+        checkEmailAndPhoneNumberNotTaken(appUserDto);
         AppUser appUser = new AppUser();
         appUser.setFirstName(appUserDto.getFirstName());
         appUser.setLastName(appUserDto.getLastName());
         appUser.setPhoneNumber(appUserDto.getPhoneNumber());
         appUser.setEmail(appUserDto.getEmail());
-//        appUser.setRole("USER");
-//        appUser.setPassword(passwordEncoder.encode(appUserDto.getPassword()));
+        appUser.setRole("USER");
+        //appUser.setPassword(passwordEncoder.encode(appUserDto.getPassword()));
 
         //validating password
         appuserRepository.save(appUser);
 
         return appUser;
+    }
+
+    private void checkEmailAndPhoneNumberNotTaken(AppUserDto appUserDto) {
+
+        //check if the email or phone number already exists
+        if(appuserRepository.existsByEmail(appUserDto.getEmail()) ||
+                appuserRepository.existsByPhoneNumber(appUserDto.getPhoneNumber())){
+
+            //handle the case when email and phoneNumber already exists
+            throw new IllegalArgumentException("Email or Phone number is already taken");
+        }
     }
 
     @Override
