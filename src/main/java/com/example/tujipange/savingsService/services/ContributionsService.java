@@ -46,7 +46,7 @@ public class ContributionsService {
             log.error("the contributed amount is null {}", contributedAmount);
         }
 
-        //The value will be gotten from admin table
+        //The value will be gotten from admin table -> Contribution Metrics
         var expectedAmount = 500;
         var contributionCode = "Cn" + generateRandomNumberService.generateRandomNumber();
 
