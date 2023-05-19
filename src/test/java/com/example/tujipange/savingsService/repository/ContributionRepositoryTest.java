@@ -1,6 +1,6 @@
 package com.example.tujipange.savingsService.repository;
 
-import com.example.tujipange.savingsService.models.Contributions;
+import com.example.tujipange.savingsService.models.IndividualContributions;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +20,14 @@ class ContributionRepositoryTest {
         var expected = 10000;
         var pendingBalance = 10000-expected;
 
-        Contributions contributions = Contributions.builder()
+        IndividualContributions individualContributions = IndividualContributions.builder()
                 .contributedAmount(BigDecimal.valueOf(10000))
                 .contributionDate(LocalDate.now())
                 .contributionCode("vvzfsfag")
                 .pendingBalance(BigDecimal.valueOf(pendingBalance))
                         .build();
 
-        contributionRepository.save(contributions);
+        contributionRepository.save(individualContributions);
     }
 
 }

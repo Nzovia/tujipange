@@ -1,6 +1,6 @@
 package com.example.tujipange.savingsService.dtos;
 
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,10 +11,13 @@ import java.time.LocalDateTime;
  * @Contact: itsdevelopernic22@gmail.com
  */
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MemberContributionsRequest {
-    private Long userReferenceId = 1L;
-    private String memberIdNumber;
+    private Long userId;
+    private String memberNumber;
     private BigDecimal contributedAmount;
     private LocalDateTime contributionDate;
     //private LocalDateTime contributionDeadline;

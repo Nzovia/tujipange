@@ -24,15 +24,13 @@ public class MemberSavings {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(name = "member_number", unique = true)
-    private String memberIdNumber;; //unique code that identifies members
     @Column(name = "contribution_code", unique = true)
     private String contributionCode;
     @Column(name = "savings_amount")
     private BigDecimal savingsAmount;
     @Column(name = "savings_date")
     private LocalDate savingsDate;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id") //means many savings to one user
-    private AppUser appUser;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "contribution_id")
+    private IndividualContributions individualContributions;
 }

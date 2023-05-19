@@ -1,6 +1,6 @@
 package com.example.tujipange.savingsService.repository;
 
-import com.example.tujipange.savingsService.models.MonthlyShare;
+import com.example.tujipange.savingsService.models.MerryGoRound;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface MemberSharingRepository extends JpaRepository<MonthlyShare, Long> {
+public interface MemberSharingRepository extends JpaRepository<MerryGoRound, Long> {
 }

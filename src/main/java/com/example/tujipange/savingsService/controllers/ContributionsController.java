@@ -1,7 +1,7 @@
 package com.example.tujipange.savingsService.controllers;
 
 import com.example.tujipange.savingsService.dtos.MemberContributionsRequest;
-import com.example.tujipange.savingsService.models.Contributions;
+import com.example.tujipange.savingsService.models.IndividualContributions;
 import com.example.tujipange.savingsService.services.ContributionsService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
@@ -21,8 +21,8 @@ public class ContributionsController {
     @PostMapping
     @ApiOperation("This is a POST method for users to make contributions to their savings wallet")
     @ResponseStatus(HttpStatus.OK)
-    public void makeContributions(@RequestBody MemberContributionsRequest request){
-        contributionsService.makeContributions(request);
+    public void makeContributions(@RequestBody MemberContributionsRequest request, @RequestParam Long userId){
+        contributionsService.makeContributions(request, userId);
     }
 
     //update contributions
@@ -31,8 +31,8 @@ public class ContributionsController {
     @GetMapping
     @ApiOperation("This is a GET method to list all the contributions made by the group members")
     @ResponseStatus(HttpStatus.OK)
-    public List<Contributions> getAllContributions(){
-        List<Contributions> contributions = contributionsService.getAllMemberContributions();
+    public List<IndividualContributions> getAllContributions(){
+        List<IndividualContributions> contributions = contributionsService.getAllMemberContributions();
         return contributions;
     }
 }

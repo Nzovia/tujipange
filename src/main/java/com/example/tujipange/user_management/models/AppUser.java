@@ -1,7 +1,7 @@
 package com.example.tujipange.user_management.models;
 
 import com.example.tujipange.loanprocessing.models.Loan;
-import com.example.tujipange.savingsService.models.Contributions;
+import com.example.tujipange.savingsService.models.IndividualContributions;
 import lombok.*;
 
 import javax.persistence.*;
@@ -41,5 +41,5 @@ public class AppUser {
     @JoinColumn(name = "loan_id")
     private Loan loan;
     @OneToMany(mappedBy = "appUser")
-    private Set<Contributions> contributions;
+    private Set<IndividualContributions> contributions;
 }
