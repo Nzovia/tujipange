@@ -1,14 +1,16 @@
 package com.example.tujipange.savingsService.services;
 
 import com.example.tujipange.savingsService.dtos.MemberContributionsRequest;
+import com.example.tujipange.savingsService.models.IndividualContributions;
 import com.example.tujipange.savingsService.models.MemberSavings;
+import com.example.tujipange.savingsService.repository.ContributionRepository;
 import com.example.tujipange.savingsService.repository.MemberSavingsRepository;
+import com.example.tujipange.user_management.models.AppUser;
 import com.example.tujipange.utils.GenerateRandomNumberService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -21,16 +23,27 @@ import java.time.LocalDate;
 @Service
 @Slf4j
 public class MemberSavingsService {
-    @Autowired
-    private  MemberSavingsRepository memberSavingsRepository;
-    @Autowired
-    private  GenerateRandomNumberService generateRandomNumberService;
+    private final MemberSavingsRepository memberSavingsRepository;
+    private final GenerateRandomNumberService generateRandomNumberService;
+    private final ContributionRepository contributionRepository;
+    public MemberSavingsService(MemberSavingsRepository memberSavingsRepository,
+                                GenerateRandomNumberService generateRandomNumberService,
+                                ContributionRepository contributionRepository) {
+        this.memberSavingsRepository = memberSavingsRepository;
+        this.generateRandomNumberService = generateRandomNumberService;
+        this.contributionRepository = contributionRepository;
+    }
 
-    public BigDecimal saveMoney(MemberContributionsRequest contributionsRequest){
+    public BigDecimal saveMoney(MemberContributionsRequest contributionsRequest, Long contributionId){
         //TODO: contributions, savings and merry-go round amount to be defined by the admin..
         //TODO: TableName == MemberContributionsPlan -> from this table we will get necessary amounts and deadlines
 
         //check whether member contribution == to the expected amount -if yes call the service
+
+        //validating that contribution exists by id
+        IndividualContributions individualContributions = contributionRepository.findById(contributionId)
+                .orElseThrow(() -> new EntityNotFoundException("Seems no contribution was made towards this saving"));
+
         var contributionAmount = contributionsRequest.getContributedAmount();
         var amountToBeSaved = BigDecimal.valueOf(250);
         var savedAmount = BigDecimal.ZERO;
@@ -43,7 +56,6 @@ public class MemberSavingsService {
 
             //ContributedAmount equals to amountToBeSaved
         } else if (contributionAmount.compareTo(amountToBeSaved) == 0) {
-
             savedAmount = contributionAmount;
         }else{
             //check whether expected amount is equal to contributed amount.
@@ -56,6 +68,7 @@ public class MemberSavingsService {
                 .contributionCode(savingsCode)
                 .savingsAmount(contributionsRequest.getContributedAmount())
                 .savingsDate(LocalDate.now())
+                .individualContributions(individualContributions)
                 .build();
 
         memberSavingsRepository.save(memberSavings);
