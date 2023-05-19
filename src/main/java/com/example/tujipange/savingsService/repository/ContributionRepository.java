@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ContributionRepository extends JpaRepository<IndividualContributions, Long> {
+    boolean existsByMemberNumber(String memberNumber);
 }

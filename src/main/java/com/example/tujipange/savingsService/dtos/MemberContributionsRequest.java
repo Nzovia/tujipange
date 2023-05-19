@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberContributionsRequest {
-    private Long userId;
+    private Long userId = 1L;
     private String memberNumber;
     private BigDecimal contributedAmount;
     private LocalDateTime contributionDate;

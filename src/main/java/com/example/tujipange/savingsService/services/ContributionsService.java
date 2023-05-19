@@ -24,14 +24,15 @@ import java.util.Objects;
 @Service
 @Slf4j
 public class ContributionsService {
-    private final ContributionRepository repository;
+    private final ContributionRepository contributionRepository;
     private AppuserRepository appuserRepository;
     private final GenerateRandomNumberService generateRandomNumberService;
 
     //members making their contributions
-    public ContributionsService(ContributionRepository repository,
-                                AppuserRepository appuserRepository, GenerateRandomNumberService generateRandomNumberService) {
-        this.repository = repository;
+    public ContributionsService(ContributionRepository contributionRepository,
+                                AppuserRepository appuserRepository,
+                                GenerateRandomNumberService generateRandomNumberService) {
+        this.contributionRepository = contributionRepository;
         this.appuserRepository = appuserRepository;
         this.generateRandomNumberService = generateRandomNumberService;
     }
@@ -51,6 +52,9 @@ public class ContributionsService {
         AppUser appUser = appuserRepository.findById(userId)
                         .orElseThrow(() -> new EntityNotFoundException("Sorry User with ID not found"));
                 individualContributions.setAppUser(appUser);
+
+                //call a method to check if memberNumber exists
+                checkIfMemberNumberExists(request);
                 individualContributions.setMemberNumber(request.getMemberNumber());
                 individualContributions.setContributionCode(contributionCode);
                 individualContributions.setExpectedAmount(BigDecimal.valueOf(expectedAmount));
@@ -61,9 +65,9 @@ public class ContributionsService {
 
         log.info("can't get the value {}",String.valueOf(individualContributions));
 
-        repository.save(individualContributions);
+        contributionRepository.saveAndFlush(individualContributions);
 
-        log.info("savings with code {} added successfully ", contributionCode);
+        log.info("savings with code {} added successfully ", individualContributions.getContributedAmount());
 
         //TODO: here call the savings method and the merry-go round...
         // savings account goes to the savings till while
@@ -72,10 +76,17 @@ public class ContributionsService {
 
         //after contributions call savings service...
 
+
+    }
+    private void checkIfMemberNumberExists(MemberContributionsRequest request) {
+        if(contributionRepository.existsByMemberNumber(request.getMemberNumber())){
+            //handle the case when email and phoneNumber already exists
+            throw new IllegalArgumentException("MemberNumber already exists");
+        }
     }
 
     public List<IndividualContributions> getAllMemberContributions() {
-        var contributions = repository.findAll();
+        var contributions = contributionRepository.findAll();
         return contributions;
     }
 }

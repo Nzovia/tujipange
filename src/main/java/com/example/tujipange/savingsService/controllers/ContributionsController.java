@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/contributions")
+@RequestMapping("api/v1/")
 public class ContributionsController {
     private final ContributionsService contributionsService;
     public ContributionsController(ContributionsService contributionsService) {
@@ -18,17 +18,17 @@ public class ContributionsController {
     }
 
     //make contributions
-    @PostMapping
+    @PostMapping("/contributions/{userId}")
     @ApiOperation("This is a POST method for users to make contributions to their savings wallet")
     @ResponseStatus(HttpStatus.OK)
-    public void makeContributions(@RequestBody MemberContributionsRequest request, @RequestParam Long userId){
+    public void makeContributions(@RequestBody MemberContributionsRequest request, @PathVariable Long userId){
         contributionsService.makeContributions(request, userId);
     }
 
     //update contributions
 
     //get all contributions
-    @GetMapping
+    @GetMapping("contributions")
     @ApiOperation("This is a GET method to list all the contributions made by the group members")
     @ResponseStatus(HttpStatus.OK)
     public List<IndividualContributions> getAllContributions(){
