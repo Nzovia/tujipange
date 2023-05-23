@@ -1,4 +1,4 @@
-package com.example.tujipange.admin.entities;
+package com.example.tujipange.admin.services;
 
 /**
  * @author Nicholas Nzovia
@@ -6,5 +6,5 @@ package com.example.tujipange.admin.entities;
  * @Contact: itsdevelopernic22@gmail.com
  */
 
-public class LoanProducts {
+public class LoanProductsSetUp {
 }

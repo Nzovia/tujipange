@@ -1,7 +1,7 @@
 package com.example.tujipange.user_management.models;
 
 import com.example.tujipange.loanprocessing.models.Loan;
-import com.example.tujipange.savingsService.models.IndividualContributions;
+import com.example.tujipange.contributionsService.models.IndividualContributions;
 import lombok.*;
 
 import javax.persistence.*;
