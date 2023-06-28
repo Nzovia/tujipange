@@ -1,6 +1,9 @@
 package com.example.tujipange.admin.repositories;
 
+import com.example.tujipange.admin.entities.MemberContributionMetric;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 
 /**
  * @author Nicholas Nzovia
@@ -9,5 +12,5 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public class MemberMetricRepository {
+public interface MemberMetricRepository extends JpaRepository<MemberContributionMetric, Long>{
 }

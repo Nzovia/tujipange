@@ -1,12 +1,19 @@
 package com.example.tujipange.admin.services;
 
-import org.springframework.stereotype.Service;
+import com.example.tujipange.admin.dtos.ContributionMetricDto;
+import com.example.tujipange.admin.entities.MemberContributionMetric;
+
+import java.util.Collection;
 
 /**
  * @author Nicholas Nzovia
- * @On 19/05/2023
+ * @On 28/06/2023
  * @Contact: itsdevelopernic22@gmail.com
  */
-@Service
-public class MemberContributionMetricSetUp {
+public interface MemberContributionMetricSetUp {
+    public abstract String createContributionMetric(ContributionMetricDto contributionMetricRequest);
+    public abstract void updateContributionMetric();
+    public abstract void deleteContributionMetric();
+    public abstract Collection<MemberContributionMetric> getAllContributionMetrics();
+
 }
