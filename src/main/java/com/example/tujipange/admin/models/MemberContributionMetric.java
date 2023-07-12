@@ -24,6 +24,8 @@ public class MemberContributionMetric {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(name = "metric_code", unique = true, nullable = false)
+    private String metricCode;
     @Enumerated(EnumType.STRING)
     private ContributionSpans periodEnum;
     private LocalDate dueDate;
