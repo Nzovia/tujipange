@@ -1,7 +1,7 @@
 package com.example.tujipange.admin.services;
 
 import com.example.tujipange.admin.dtos.ContributionMetricDto;
-import com.example.tujipange.admin.entities.MemberContributionMetric;
+import com.example.tujipange.admin.models.MemberContributionMetric;
 import com.example.tujipange.admin.enums.ContributionSpans;
 import com.example.tujipange.admin.repositories.MemberMetricRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class MemberContributionMetricSetUpImpl implements MemberContributionMetr
     }
 
     @Override
-    public void updateContributionMetric() {
+    public void updateContributionMetric(ContributionMetricDto updateRequest) {
 
     }
 

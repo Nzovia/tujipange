@@ -1,6 +1,6 @@
 package com.example.tujipange.admin.repositories;
 
-import com.example.tujipange.admin.entities.MemberContributionMetric;
+import com.example.tujipange.admin.models.MemberContributionMetric;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

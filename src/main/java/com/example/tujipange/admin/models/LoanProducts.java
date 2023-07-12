@@ -1,4 +1,4 @@
-package com.example.tujipange.admin.entities;
+package com.example.tujipange.admin.models;
 
 /**
  * @author Nicholas Nzovia

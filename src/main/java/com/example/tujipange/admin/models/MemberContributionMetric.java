@@ -1,4 +1,4 @@
-package com.example.tujipange.admin.entities;
+package com.example.tujipange.admin.models;
 
 import com.example.tujipange.admin.enums.ContributionSpans;
 import lombok.*;
@@ -19,19 +19,22 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "contribution metrics")
+@Table(name = "contribution_metrics")
 public class MemberContributionMetric {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @Column(name = "metric_code", unique = true, nullable = false)
+    private long id;
+
+    @Column(unique = true, nullable = false)
     private String metricCode;
+
     @Enumerated(EnumType.STRING)
     private ContributionSpans periodEnum;
+
     private LocalDate dueDate;
-    private BigDecimal ContributionAmount;
+    private BigDecimal contributionAmount;
     private float savingsPercentage;
     private float merryGoRoundPercentage;
     private float penaltyPercentage;
-
 }
+

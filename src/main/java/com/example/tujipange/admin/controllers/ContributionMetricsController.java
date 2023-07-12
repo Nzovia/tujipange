@@ -1,14 +1,17 @@
 package com.example.tujipange.admin.controllers;
 
 import com.example.tujipange.admin.dtos.ContributionMetricDto;
-import com.example.tujipange.admin.repositories.MemberMetricRepository;
 import com.example.tujipange.admin.services.MemberContributionMetricSetUpImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Nicholas Nzovia
@@ -21,12 +24,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class ContributionMetricsController {
     @Autowired
     private MemberContributionMetricSetUpImpl memberContributionMetricSetUp;
-
     @PostMapping("/addContributionMetric")
     public ResponseEntity<String> addMemberContributionMetric(ContributionMetricDto contributionMetricDto) {
         memberContributionMetricSetUp.createContributionMetric(contributionMetricDto);
         return new ResponseEntity<>("Product Created Successfully", HttpStatus.OK);
     }
+
+    @GetMapping("/metrics")
+    public ResponseEntity<List> getAllContributionMetric(){
+        var metrics = memberContributionMetricSetUp.getAllContributionMetrics();
+        return ResponseEntity.ok(Collections.singletonList(metrics));
+    };
 
 
 
