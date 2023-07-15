@@ -17,13 +17,12 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity
 @Table(name = "contribution_metrics")
 public class MemberContributionMetric {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long metricId;
 
     @Column(unique = true, nullable = false)
     private String metricCode;

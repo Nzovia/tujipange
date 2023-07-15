@@ -1,14 +1,14 @@
 package com.example.tujipange.admin.services;
 
 import com.example.tujipange.admin.dtos.ContributionMetricDto;
-import com.example.tujipange.admin.models.MemberContributionMetric;
 import com.example.tujipange.admin.enums.ContributionSpans;
+import com.example.tujipange.admin.models.MemberContributionMetric;
 import com.example.tujipange.admin.repositories.MemberMetricRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Nicholas Nzovia
@@ -40,17 +40,37 @@ public class MemberContributionMetricSetUpImpl implements MemberContributionMetr
     }
 
     @Override
-    public void updateContributionMetric(ContributionMetricDto updateRequest) {
+    public MemberContributionMetric updateContributionMetric(Long metricId, ContributionMetricDto updateRequest) {
+       //get the existing metric
+       MemberContributionMetric contributionMetric = memberMetricRepository.findByMetricCode(updateRequest.getMetricCode());
 
+        //check whether the records exist
+       contributionMetric.setMetricCode(updateRequest.getMetricCode());
+       contributionMetric.setContributionAmount(updateRequest.getContributionAmount());
+       contributionMetric.setPeriodEnum(ContributionSpans.valueOf(updateRequest.getPeriodEnum()));
+       contributionMetric.setDueDate(updateRequest.getDueDate());
+       contributionMetric.setPenaltyPercentage(updateRequest.getPenaltyPercentage());
+       contributionMetric.setSavingsPercentage(updateRequest.getSavingsPercentage());
+       contributionMetric.setMerryGoRoundPercentage(contributionMetric.getMerryGoRoundPercentage());
+
+       var updatedContributionMeteric = memberMetricRepository.save(contributionMetric);
+
+        return updatedContributionMeteric;
     }
 
     @Override
-    public void deleteContributionMetric() {
-
+    public String deleteContributionMetric(Long metricId) {
+        String deletionMessage = "";
+       try{
+           memberMetricRepository.deleteById(metricId);
+           return  deletionMessage;
+       }catch (Exception ex){
+           return ex.getMessage();
+       }
     }
 
     @Override
-    public Collection<MemberContributionMetric> getAllContributionMetrics() {
-        return null;
+    public List<MemberContributionMetric> getAllContributionMetrics() {
+        return memberMetricRepository.findAll();
     }
 }

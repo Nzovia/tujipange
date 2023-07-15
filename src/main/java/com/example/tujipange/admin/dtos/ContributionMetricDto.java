@@ -20,6 +20,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class ContributionMetricDto {
+    private String metricCode;
     private String periodEnum;
     private LocalDate dueDate;
     private BigDecimal ContributionAmount;

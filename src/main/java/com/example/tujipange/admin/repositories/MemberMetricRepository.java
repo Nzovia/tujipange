@@ -4,6 +4,9 @@ import com.example.tujipange.admin.models.MemberContributionMetric;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 
 /**
  * @author Nicholas Nzovia
@@ -13,4 +16,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MemberMetricRepository extends JpaRepository<MemberContributionMetric, Long>{
+    MemberContributionMetric findByMetricCode(String metricCode);
 }
