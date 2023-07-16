@@ -2,6 +2,7 @@ package com.example.tujipange.admin.services;
 
 import com.example.tujipange.admin.dtos.ContributionMetricDto;
 import com.example.tujipange.admin.models.MemberContributionMetric;
+import com.example.tujipange.exceptions.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public interface MemberContributionMetricSetUp {
      String createContributionMetric(ContributionMetricDto contributionMetricRequest);
      MemberContributionMetric updateContributionMetric(Long metricCode, ContributionMetricDto contributionMetricDto);
-    String deleteContributionMetric(Long metricId);
+    String deleteContributionMetric(Long metricId) throws ResourceNotFoundException;
     List<MemberContributionMetric> getAllContributionMetrics();
 
 }

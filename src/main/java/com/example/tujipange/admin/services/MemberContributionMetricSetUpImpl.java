@@ -4,6 +4,7 @@ import com.example.tujipange.admin.dtos.ContributionMetricDto;
 import com.example.tujipange.admin.enums.ContributionSpans;
 import com.example.tujipange.admin.models.MemberContributionMetric;
 import com.example.tujipange.admin.repositories.MemberMetricRepository;
+import com.example.tujipange.exceptions.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Nicholas Nzovia
@@ -71,10 +71,12 @@ public class MemberContributionMetricSetUpImpl implements MemberContributionMetr
     }
 
     @Override
-    public String deleteContributionMetric(Long metricId) {
+    public String deleteContributionMetric(Long metricId) throws ResourceNotFoundException {
         String deletionMessage = "";
         try {
-            memberMetricRepository.deleteById(metricId);
+            MemberContributionMetric memberContributionMetric = memberMetricRepository.findById(metricId)
+                            .orElseThrow(() -> new ResourceNotFoundException("Referenced Metric not found: " + metricId));
+            memberMetricRepository.delete(memberContributionMetric);
             return deletionMessage;
         } catch (Exception ex) {
             return ex.getMessage();

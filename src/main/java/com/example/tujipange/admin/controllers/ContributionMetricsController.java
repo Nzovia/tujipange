@@ -4,6 +4,7 @@ import com.example.tujipange.admin.dtos.ContributionMetricDto;
 import com.example.tujipange.admin.models.MemberContributionMetric;
 import com.example.tujipange.admin.services.MemberContributionMetricSetUp;
 import com.example.tujipange.admin.services.MemberContributionMetricSetUpImpl;
+import com.example.tujipange.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,13 +37,13 @@ public class ContributionMetricsController {
     };
 
     @PutMapping("/update_metrics/{id}")
-    public ResponseEntity<MemberContributionMetric> updateContributionMetric(@PathVariable("id") Long metricId, @RequestBody ContributionMetricDto updateRequest){
+    public ResponseEntity<MemberContributionMetric> updateContributionMetric(@PathVariable(value = "id") Long metricId, @RequestBody ContributionMetricDto updateRequest){
         MemberContributionMetric updatedContributionMetric = memberContributionMetricSetUp.updateContributionMetric(metricId, updateRequest);
         return new ResponseEntity<>(updatedContributionMetric, HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteContributionMetric(@PathVariable("id") Long metricId){
+    public ResponseEntity<String> deleteContributionMetric(@PathVariable(value = "id") Long metricId) throws ResourceNotFoundException {
         memberContributionMetricSetUp.deleteContributionMetric(metricId);
         return new ResponseEntity<>("Metric Deleted Successfully",HttpStatus.OK);
     }
