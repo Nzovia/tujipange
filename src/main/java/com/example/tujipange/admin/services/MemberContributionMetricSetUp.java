@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface MemberContributionMetricSetUp {
      String createContributionMetric(ContributionMetricDto contributionMetricRequest);
-     MemberContributionMetric updateContributionMetric(Long metricId, ContributionMetricDto contributionMetricDto);
+     MemberContributionMetric updateContributionMetric(Long metricCode, ContributionMetricDto contributionMetricDto);
     String deleteContributionMetric(Long metricId);
     List<MemberContributionMetric> getAllContributionMetrics();
 

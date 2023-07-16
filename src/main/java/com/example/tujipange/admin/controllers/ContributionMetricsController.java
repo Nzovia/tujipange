@@ -2,6 +2,7 @@ package com.example.tujipange.admin.controllers;
 
 import com.example.tujipange.admin.dtos.ContributionMetricDto;
 import com.example.tujipange.admin.models.MemberContributionMetric;
+import com.example.tujipange.admin.services.MemberContributionMetricSetUp;
 import com.example.tujipange.admin.services.MemberContributionMetricSetUpImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,13 +22,12 @@ import java.util.List;
 @RequestMapping("api/v1/")
 public class ContributionMetricsController {
     @Autowired
-    private MemberContributionMetricSetUpImpl memberContributionMetricSetUp;
+    private MemberContributionMetricSetUp memberContributionMetricSetUp;
     @PostMapping("/addContributionMetric")
     public ResponseEntity<String> addMemberContributionMetric(@RequestBody ContributionMetricDto contributionMetricDto) {
         memberContributionMetricSetUp.createContributionMetric(contributionMetricDto);
-        return new ResponseEntity<>("Product Created Successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Metric added Successfully", HttpStatus.OK);
     }
-
 
     @GetMapping("/metrics")
     public ResponseEntity<List> getAllContributionMetric(){

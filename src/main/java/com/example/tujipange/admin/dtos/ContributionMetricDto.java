@@ -1,10 +1,7 @@
 package com.example.tujipange.admin.dtos;
 
 import com.example.tujipange.admin.enums.ContributionSpans;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -18,7 +15,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
 public class ContributionMetricDto {
     private String metricCode;
     private String periodEnum;

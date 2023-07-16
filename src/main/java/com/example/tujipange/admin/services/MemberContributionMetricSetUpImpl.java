@@ -4,11 +4,14 @@ import com.example.tujipange.admin.dtos.ContributionMetricDto;
 import com.example.tujipange.admin.enums.ContributionSpans;
 import com.example.tujipange.admin.models.MemberContributionMetric;
 import com.example.tujipange.admin.repositories.MemberMetricRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Nicholas Nzovia
@@ -16,57 +19,66 @@ import java.util.List;
  * @Contact: itsdevelopernic22@gmail.com
  */
 @Service
+@Slf4j
 public class MemberContributionMetricSetUpImpl implements MemberContributionMetricSetUp {
     @Autowired
     private MemberMetricRepository memberMetricRepository;
 
     @Override
     public String createContributionMetric(ContributionMetricDto request) {
-        MemberContributionMetric contributionMetric = new MemberContributionMetric();
-        contributionMetric.setContributionAmount(request.getContributionAmount());
-        contributionMetric.setDueDate(request.getDueDate());
-        contributionMetric.setPeriodEnum(ContributionSpans.valueOf(request.getPeriodEnum()));
-        contributionMetric.setPenaltyPercentage(request.getPenaltyPercentage());
-        contributionMetric.setSavingsPercentage(request.getSavingsPercentage());
-        contributionMetric.setMerryGoRoundPercentage(request.getMerryGoRoundPercentage());
+        try {
+            MemberContributionMetric contributionMetric = new MemberContributionMetric();
 
-        try{
-            memberMetricRepository.save(contributionMetric);
+            contributionMetric.setContributionAmount(request.getContributionAmount());
+            contributionMetric.setDueDate(request.getDueDate());
+            contributionMetric.setMetricCode(request.getMetricCode());
+            contributionMetric.setPeriodEnum(ContributionSpans.valueOf(request.getPeriodEnum()));
+            contributionMetric.setPenaltyPercentage(request.getPenaltyPercentage());
+            contributionMetric.setSavingsPercentage(request.getSavingsPercentage());
+            contributionMetric.setMerryGoRoundPercentage(request.getMerryGoRoundPercentage());
+
+            var savedMetric = memberMetricRepository.save(contributionMetric);
+            log.info("Here saving the object ",savedMetric);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
         }
-        catch(DataAccessException e){
-            e.getMessage();
-        }
-     return "Metric added";
+        return "Metric added";
     }
 
     @Override
-    public MemberContributionMetric updateContributionMetric(Long metricId, ContributionMetricDto updateRequest) {
-       //get the existing metric
-       MemberContributionMetric contributionMetric = memberMetricRepository.findByMetricCode(updateRequest.getMetricCode());
+    public MemberContributionMetric updateContributionMetric(Long metricId, ContributionMetricDto updateRequest) throws EntityNotFoundException {
+        //get the existing metric
+        MemberContributionMetric contributionMetric = memberMetricRepository.findById(metricId).get();
 
-        //check whether the records exist
-       contributionMetric.setMetricCode(updateRequest.getMetricCode());
-       contributionMetric.setContributionAmount(updateRequest.getContributionAmount());
-       contributionMetric.setPeriodEnum(ContributionSpans.valueOf(updateRequest.getPeriodEnum()));
-       contributionMetric.setDueDate(updateRequest.getDueDate());
-       contributionMetric.setPenaltyPercentage(updateRequest.getPenaltyPercentage());
-       contributionMetric.setSavingsPercentage(updateRequest.getSavingsPercentage());
-       contributionMetric.setMerryGoRoundPercentage(contributionMetric.getMerryGoRoundPercentage());
+        if(contributionMetric.equals(null)){
+            //check whether the records exist
+            contributionMetric.setMetricCode(updateRequest.getMetricCode());
+            contributionMetric.setContributionAmount(updateRequest.getContributionAmount());
+            contributionMetric.setPeriodEnum(ContributionSpans.valueOf(updateRequest.getPeriodEnum()));
+            contributionMetric.setDueDate(updateRequest.getDueDate());
+            contributionMetric.setPenaltyPercentage(updateRequest.getPenaltyPercentage());
+            contributionMetric.setSavingsPercentage(updateRequest.getSavingsPercentage());
+            contributionMetric.setMerryGoRoundPercentage(contributionMetric.getMerryGoRoundPercentage());
 
-       var updatedContributionMeteric = memberMetricRepository.save(contributionMetric);
+            var updatedContributionMeteric = memberMetricRepository.save(contributionMetric);
 
-        return updatedContributionMeteric;
+            return updatedContributionMeteric;
+        }else {
+            throw  new EntityNotFoundException("Metric not found by the ID" + metricId);
+        }
+
+
     }
 
     @Override
     public String deleteContributionMetric(Long metricId) {
         String deletionMessage = "";
-       try{
-           memberMetricRepository.deleteById(metricId);
-           return  deletionMessage;
-       }catch (Exception ex){
-           return ex.getMessage();
-       }
+        try {
+            memberMetricRepository.deleteById(metricId);
+            return deletionMessage;
+        } catch (Exception ex) {
+            return ex.getMessage();
+        }
     }
 
     @Override
