@@ -37,7 +37,8 @@ public class ContributionMetricsController {
     };
 
     @PutMapping("/update_metrics/{id}")
-    public ResponseEntity<MemberContributionMetric> updateContributionMetric(@PathVariable(value = "id") Long metricId, @RequestBody ContributionMetricDto updateRequest){
+    public ResponseEntity<MemberContributionMetric>
+    updateContributionMetric(@PathVariable(value = "id") Long metricId, @RequestBody ContributionMetricDto updateRequest) throws ResourceNotFoundException {
         MemberContributionMetric updatedContributionMetric = memberContributionMetricSetUp.updateContributionMetric(metricId, updateRequest);
         return new ResponseEntity<>(updatedContributionMetric, HttpStatus.OK);
     }

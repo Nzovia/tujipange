@@ -38,7 +38,7 @@ public class MemberContributionMetricSetUpImpl implements MemberContributionMetr
             contributionMetric.setMerryGoRoundPercentage(request.getMerryGoRoundPercentage());
 
             var savedMetric = memberMetricRepository.save(contributionMetric);
-            log.info("Here saving the object ",savedMetric);
+            log.info("Here saving the object ", savedMetric);
         } catch (DataAccessException e) {
             e.printStackTrace();
         }
@@ -46,26 +46,23 @@ public class MemberContributionMetricSetUpImpl implements MemberContributionMetr
     }
 
     @Override
-    public MemberContributionMetric updateContributionMetric(Long metricId, ContributionMetricDto updateRequest) throws EntityNotFoundException {
+    public MemberContributionMetric updateContributionMetric(Long metricId, ContributionMetricDto updateRequest) throws ResourceNotFoundException {
         //get the existing metric
-        MemberContributionMetric contributionMetric = memberMetricRepository.findById(metricId).get();
+        MemberContributionMetric contributionMetric = memberMetricRepository.findById(metricId).orElseThrow(
+                () -> new ResourceNotFoundException("Metric not found by the ID: " + metricId)
+        );
+        //check whether the records exist
+        contributionMetric.setMetricCode(updateRequest.getMetricCode());
+        contributionMetric.setContributionAmount(updateRequest.getContributionAmount());
+        contributionMetric.setPeriodEnum(ContributionSpans.valueOf(updateRequest.getPeriodEnum()));
+        contributionMetric.setDueDate(updateRequest.getDueDate());
+        contributionMetric.setPenaltyPercentage(updateRequest.getPenaltyPercentage());
+        contributionMetric.setSavingsPercentage(updateRequest.getSavingsPercentage());
+        contributionMetric.setMerryGoRoundPercentage(contributionMetric.getMerryGoRoundPercentage());
 
-        if(contributionMetric.equals(null)){
-            //check whether the records exist
-            contributionMetric.setMetricCode(updateRequest.getMetricCode());
-            contributionMetric.setContributionAmount(updateRequest.getContributionAmount());
-            contributionMetric.setPeriodEnum(ContributionSpans.valueOf(updateRequest.getPeriodEnum()));
-            contributionMetric.setDueDate(updateRequest.getDueDate());
-            contributionMetric.setPenaltyPercentage(updateRequest.getPenaltyPercentage());
-            contributionMetric.setSavingsPercentage(updateRequest.getSavingsPercentage());
-            contributionMetric.setMerryGoRoundPercentage(contributionMetric.getMerryGoRoundPercentage());
+        var updatedContributionMeteric = memberMetricRepository.save(contributionMetric);
 
-            var updatedContributionMeteric = memberMetricRepository.save(contributionMetric);
-
-            return updatedContributionMeteric;
-        }else {
-            throw  new EntityNotFoundException("Metric not found by the ID" + metricId);
-        }
+        return updatedContributionMeteric;
 
 
     }
@@ -75,7 +72,7 @@ public class MemberContributionMetricSetUpImpl implements MemberContributionMetr
         String deletionMessage = "";
         try {
             MemberContributionMetric memberContributionMetric = memberMetricRepository.findById(metricId)
-                            .orElseThrow(() -> new ResourceNotFoundException("Referenced Metric not found: " + metricId));
+                    .orElseThrow(() -> new ResourceNotFoundException("Referenced Metric not found: " + metricId));
             memberMetricRepository.delete(memberContributionMetric);
             return deletionMessage;
         } catch (Exception ex) {

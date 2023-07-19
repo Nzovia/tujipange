@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface MemberContributionMetricSetUp {
      String createContributionMetric(ContributionMetricDto contributionMetricRequest);
-     MemberContributionMetric updateContributionMetric(Long metricCode, ContributionMetricDto contributionMetricDto);
+     MemberContributionMetric updateContributionMetric(Long metricCode, ContributionMetricDto contributionMetricDto) throws ResourceNotFoundException;
     String deleteContributionMetric(Long metricId) throws ResourceNotFoundException;
     List<MemberContributionMetric> getAllContributionMetrics();
 
