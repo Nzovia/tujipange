@@ -24,7 +24,7 @@ public class LoanProduct {
     @Column(nullable = false, name = "loan_product")
     private String loanProductName; //there are four names of the products(Bronze, Silver, Gold and platuinum)
     @Column(nullable = false, name = "loan_percentage")
-    private int percentage; //computes percentage by which your loan will be from the saving
+    private Double percentage; //computes percentage by which your loan will be from the saving
     private int loanPeriod; //number of days from loan request to payment day
 
 
