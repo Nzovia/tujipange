@@ -1,5 +1,6 @@
 package com.example.tujipange.loanprocessing.models;
 
+import com.example.tujipange.loanprocessing.enums.LoanProductName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,10 +23,12 @@ public class LoanProduct {
     @Column(unique = true, nullable = false, length = 10)
     private String productCode;
     @Column(nullable = false, name = "loan_product")
-    private String loanProductName; //there are four names of the products(Bronze, Silver, Gold and platuinum)
+    private LoanProductName loanProductName; //there are four names of the products(Bronze, Silver, Gold and platuinum)
     @Column(nullable = false, name = "loan_percentage")
     private Double percentage; //computes percentage by which your loan will be from the saving
     private int loanPeriod; //number of days from loan request to payment day
+    @Column(name = "product_status") //Active/INACTIVE
+    private Boolean status;
 
 
 }

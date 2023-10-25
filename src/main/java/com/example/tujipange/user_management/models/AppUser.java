@@ -3,8 +3,11 @@ package com.example.tujipange.user_management.models;
 import com.example.tujipange.loanprocessing.models.Loan;
 import com.example.tujipange.contributionsService.models.IndividualContributions;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Set;
 
 @Getter
@@ -16,21 +19,20 @@ import java.util.Set;
 @Table(
         name = "users",
 uniqueConstraints = @UniqueConstraint(
-//        name = {"unique_email","unique_phone"},
         columnNames = {"email_address", "phone_number"}
 ))
-public class AppUser {
+public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "f_name", nullable = false)
-    private String firstName = "Nicholas";
+    private String firstName;
     @Column(name = "l_name", nullable = false)
-    private String lastName = "Maundu";
+    private String lastName;
     @Column(name = "phone_number", nullable = false)
-    private String phoneNumber = "0796182814";
+    private String phoneNumber;
     @Column(name = "email_address", nullable = false)
-    private String email = "nickiemaundu@gmail.com";
+    private String email;
     @Column(length = 60, name = "password")
     private String password;
     @Column(name ="user_role")
@@ -42,4 +44,30 @@ public class AppUser {
     private Loan loan;
     @OneToMany(mappedBy = "appUser")
     private Set<IndividualContributions> contributions;
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 }

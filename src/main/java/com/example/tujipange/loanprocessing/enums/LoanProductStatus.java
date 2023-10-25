@@ -5,9 +5,6 @@ package com.example.tujipange.loanprocessing.enums;
  * @On 05/09/2023
  * @Contact: itsdevelopernic22@gmail.com
  */
-public enum LoanProductNames {
-    BRONZE,
-    SILVER,
-    GOLD,
-    PLATINUM
+public enum LoanProductStatus {
+    ACTIVE, INACTIVE
 }
