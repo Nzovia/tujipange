@@ -4,5 +4,6 @@ package com.example.tujipange.security;
 @On 26/10/2023
 @Contact: itsdevelopernic22@gmail.com
 */
-public interface AuthenticationService {
+
+public class SecurityConfig {
 }
