@@ -12,3 +12,4 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+token.sign.key : "123$jwt.K"
