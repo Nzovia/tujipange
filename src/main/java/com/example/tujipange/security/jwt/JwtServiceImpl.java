@@ -1,5 +1,6 @@
-package com.example.tujipange.security;
+package com.example.tujipange.security.jwt;
 
+import com.example.tujipange.security.jwt.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -22,7 +23,7 @@ import java.util.function.Function;
  */
 
 @Service
-public class JwtServiceImpl implements JwtService{
+public class JwtServiceImpl implements JwtService {
     @Value("${token.sign.key}")
     private String jwtSignInKey;
     @Override

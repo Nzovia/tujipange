@@ -1,4 +1,4 @@
-package com.example.tujipange.security;
+package com.example.tujipange.security.jwt;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
