@@ -6,7 +6,6 @@ import com.example.tujipange.user_management.dto.AppUserLoginRequest;
 import com.example.tujipange.user_management.dto.AuthenticationResponse;
 import com.example.tujipange.user_management.models.AppUser;
 import com.example.tujipange.user_management.repository.AppuserRepository;
-import com.example.tujipange.user_management.services.AuthenticationService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
