@@ -6,6 +6,8 @@ import com.example.tujipange.user_management.dto.AppUserLoginRequest;
 import com.example.tujipange.user_management.dto.AuthenticationResponse;
 import com.example.tujipange.user_management.models.AppUser;
 import com.example.tujipange.user_management.repository.AppuserRepository;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
+@Slf4j
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final AppuserRepository appuserRepository;
     private final JwtService jwtService;
@@ -49,6 +52,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         //Generate Jwt token
         var jwtToken = jwtService.generateJWTToken(appUser);
+        System.out.println(jwtToken);
+        log.info("Jwt token here: {}", jwtToken);
 
         return AuthenticationResponse.builder().generatedToken(jwtToken).build();
     }

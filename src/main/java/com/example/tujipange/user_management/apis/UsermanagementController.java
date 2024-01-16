@@ -7,12 +7,15 @@ import com.example.tujipange.user_management.services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @author Nzovia Maundu
@@ -26,15 +29,15 @@ import javax.servlet.http.HttpServletRequest;
 public class UsermanagementController {
     private final AuthenticationService authenticationService;
     @PostMapping("/register")
-    public AuthenticationResponse createAccount(@RequestBody AppUserDto appUserDto){
+    public ResponseEntity<AuthenticationResponse> createAccount(@RequestBody AppUserDto appUserDto) {
         var authResponse = authenticationService.createAccountUserAccount(appUserDto);
-        return authResponse;
+        return ResponseEntity.status(HttpStatus.OK).body(authResponse);
     }
 
     @PostMapping("/sign_in")
-    public AuthenticationResponse signInToYourAccount(@RequestBody AppUserLoginRequest loginRequest){
+    public ResponseEntity<AuthenticationResponse> signInToYourAccount(@RequestBody AppUserLoginRequest loginRequest) {
         var loginResponse = authenticationService.signIn(loginRequest);
-        return loginResponse;
+        return ResponseEntity.status(HttpStatus.OK).body(loginResponse);
     }
 
 }

@@ -10,7 +10,21 @@ import lombok.Builder;
  */
 
 @Builder
-@AllArgsConstructor
 public class AuthenticationResponse {
     private String generatedToken;
+
+    public AuthenticationResponse() {
+    }
+
+    public AuthenticationResponse(String generatedToken) {
+        this.generatedToken = generatedToken;
+    }
+
+    public String getGeneratedToken() {
+        return generatedToken;
+    }
+
+    public void setGeneratedToken(String generatedToken) {
+        this.generatedToken = generatedToken;
+    }
 }
