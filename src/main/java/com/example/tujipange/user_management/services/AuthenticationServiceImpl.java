@@ -60,16 +60,23 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse signIn(AppUserLoginRequest loginRequest) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUserName(),
-                        loginRequest.getUserPassword()));
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUserName(),
+                            loginRequest.getUserPassword()));
 
-        var loggedInUser = appuserRepository.findByEmail(loginRequest.getUserName())
-                .orElseThrow(() ->new IllegalArgumentException("Invalid username or password"));
-        var jwtToken = jwtService.generateJWTToken(loggedInUser);
+            var loggedInUser = appuserRepository.findByEmail(loginRequest.getUserName())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid username or password"));
+            var jwtToken = jwtService.generateJWTToken(loggedInUser);
 
-        return AuthenticationResponse.builder().generatedToken(jwtToken).build();
+            return AuthenticationResponse.success(jwtToken);
+        } catch (Exception e) {
+            // Return an error response
+            e.printStackTrace();
+            return AuthenticationResponse.error("Authentication failed: " + e.getMessage());
+        }
     }
+
 
     private void checkEmailAndPhoneNumberNotTaken(AppUserDto appUserDto) {
 

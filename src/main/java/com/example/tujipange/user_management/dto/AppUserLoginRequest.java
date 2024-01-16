@@ -2,6 +2,7 @@ package com.example.tujipange.user_management.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Nicholas Nzovia
@@ -9,9 +10,31 @@ import lombok.Data;
  * @Contact: itsdevelopernic22@gmail.com
  */
 
-@Data
-@AllArgsConstructor
 public class AppUserLoginRequest {
     private String userName;
     private String userPassword;
+
+    public AppUserLoginRequest() {
+    }
+    public AppUserLoginRequest(String userName,
+                               String userPassword) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
 }

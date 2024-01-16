@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements  UserService{
-    private AppuserRepository appuserRepository;
+    private  final AppuserRepository appuserRepository;
     @Override
     public UserDetailsService userDetailsService() {
         return new UserDetailsService() {
