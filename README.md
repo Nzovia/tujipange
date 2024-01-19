@@ -8,4 +8,4 @@ Tujipange High level app architecture.
 #### (http://localhost:8081/tujipange/swagger-ui/)
 
 #### Sample api list
-![api list](images/Screenshot 2024-01-16 125553.png)
+![sample apis list](https://github.com/Nzovia/tujipange/assets/52350637/7d4e8743-8bbd-4bf4-875f-09e696343621)
