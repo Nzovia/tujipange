@@ -6,7 +6,6 @@ import com.example.tujipange.user_management.dto.AppUserLoginRequest;
 import com.example.tujipange.user_management.dto.AuthenticationResponse;
 import com.example.tujipange.user_management.models.AppUser;
 import com.example.tujipange.user_management.repository.AppuserRepository;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -49,13 +48,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         appUser.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
 
         appuserRepository.save(appUser);
+        String message = "Account Created Successfully";
 
-        //Generate Jwt token
-        var jwtToken = jwtService.generateJWTToken(appUser);
-        System.out.println(jwtToken);
-        log.info("Jwt token here: {}", jwtToken);
-
-        return AuthenticationResponse.builder().generatedToken(jwtToken).build();
+        return AuthenticationResponse.accountSuccess(message);
     }
 
     @Override
@@ -67,7 +62,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
             var loggedInUser = appuserRepository.findByEmail(loginRequest.getUserName())
                     .orElseThrow(() -> new IllegalArgumentException("Invalid username or password"));
-            var jwtToken = jwtService.generateJWTToken(loggedInUser);
+            var jwtToken = jwtService.generateToken(loggedInUser.getUsername());
 
             return AuthenticationResponse.success(jwtToken);
         } catch (Exception e) {

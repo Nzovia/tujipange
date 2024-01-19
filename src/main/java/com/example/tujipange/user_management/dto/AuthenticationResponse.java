@@ -14,15 +14,17 @@ public class AuthenticationResponse {
     private String generatedToken;
     private boolean error;
     private String errorMessage;
+    private String  creationMessage;
 
 
     public AuthenticationResponse() {
     }
 
-    public AuthenticationResponse(String generatedToken, boolean error, String errorMessage) {
+    public AuthenticationResponse(String generatedToken, boolean error, String errorMessage, String creationMessage) {
         this.generatedToken = generatedToken;
         this.error = error;
         this.errorMessage = errorMessage;
+        this.creationMessage = creationMessage;
     }
 
     public String getGeneratedToken() {
@@ -50,10 +52,21 @@ public class AuthenticationResponse {
     }
 
     public static AuthenticationResponse success(String generatedToken) {
-        return new AuthenticationResponse(generatedToken, false, null);
+        return new AuthenticationResponse(generatedToken, false, null,null);
     }
 
     public static AuthenticationResponse error(String errorMessage) {
-        return new AuthenticationResponse(null, true, errorMessage);
+        return new AuthenticationResponse(null, true, errorMessage,null);
+    }
+    public static AuthenticationResponse accountSuccess(String creationMessage){
+        return new AuthenticationResponse(null, false, null,creationMessage);
+    }
+
+    public String getCreationMessage() {
+        return creationMessage;
+    }
+
+    public void setCreationMessage(String creationMessage) {
+        this.creationMessage = creationMessage;
     }
 }
