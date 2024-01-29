@@ -11,5 +11,5 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
 token.sign.key : "123$jwt.K"

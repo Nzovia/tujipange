@@ -7,8 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -35,9 +34,14 @@ public class AppUser implements UserDetails {
     private String email;
     @Column(length = 60, name = "password")
     private String password;
-    @Column(name ="user_role")
-    private String role;
-    private boolean enabled = false;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "loan_id")
@@ -70,4 +74,14 @@ public class AppUser implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public void addRoles(Role role){
+        this.roles.add(role);
+    }
+
+
 }
