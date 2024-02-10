@@ -34,7 +34,7 @@ public class MemberSavingsService {
     }
 
     public BigDecimal saveMoney(MemberContributionsRequest contributionsRequest, Long contributionId){
-        //TODO: contributions, savings and merry-go round amount to be defined by the admin..
+        //TODO: contributions, savings and merry-go round amount to be defined by the adminService..
         //TODO: TableName == MemberContributionsPlan -> from this table we will get necessary amounts and deadlines
 
         //check whether member contribution == to the expected amount -if yes call the service

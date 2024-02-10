@@ -2,7 +2,7 @@ package com.example.tujipange.contributionsService.services;
 
 import com.example.tujipange.contributionsService.dtos.MemberContributionsStatementDto;
 import com.example.tujipange.contributionsService.repository.ContributionRepository;
-import com.example.tujipange.user_management.repository.AppuserRepository;
+import com.example.tujipange.userManagement.repository.AppuserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

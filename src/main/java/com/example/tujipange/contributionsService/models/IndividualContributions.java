@@ -1,6 +1,6 @@
 package com.example.tujipange.contributionsService.models;
 
-import com.example.tujipange.user_management.models.AppUser;
+import com.example.tujipange.userManagement.models.AppUser;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 

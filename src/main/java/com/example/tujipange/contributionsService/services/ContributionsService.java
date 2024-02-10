@@ -3,8 +3,8 @@ package com.example.tujipange.contributionsService.services;
 import com.example.tujipange.contributionsService.dtos.MemberContributionsRequest;
 import com.example.tujipange.contributionsService.models.IndividualContributions;
 import com.example.tujipange.contributionsService.repository.ContributionRepository;
-import com.example.tujipange.user_management.models.AppUser;
-import com.example.tujipange.user_management.repository.AppuserRepository;
+import com.example.tujipange.userManagement.models.AppUser;
+import com.example.tujipange.userManagement.repository.AppuserRepository;
 import com.example.tujipange.utils.GenerateRandomNumberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -46,7 +46,7 @@ public class ContributionsService {
             log.error("the contributed amount is null {}", contributedAmount);
         }
 
-        //The value will be gotten from admin table -> Contribution Metrics
+        //The value will be gotten from adminService table -> Contribution Metrics
         var expectedAmount = 500;
         var contributionCode = "Cn" + generateRandomNumberService.generateRandomNumber();
 
