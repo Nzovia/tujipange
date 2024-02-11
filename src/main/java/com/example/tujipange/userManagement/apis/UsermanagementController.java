@@ -35,4 +35,11 @@ public class UsermanagementController {
         return ResponseEntity.status(HttpStatus.OK).body(loginResponse);
     }
 
+    //todo. get user profile api
+
+    //todo. update user details api . Only phone number and email can be updated
+
+    //todo. forgot password api
+
+
 }
