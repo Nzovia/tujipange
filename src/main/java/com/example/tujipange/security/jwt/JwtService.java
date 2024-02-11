@@ -1,5 +1,6 @@
 package com.example.tujipange.security.jwt;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -11,6 +12,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  * @author Nicholas Nzovia
@@ -25,6 +27,10 @@ public class JwtService {
     public  String generateToken(String username){
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, username);
+    }
+
+    private Claims extractAllClaims(String token) {
+        return Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token).getBody();
     }
 
     private String createToken(Map<String, Object> claims, String username) {
@@ -46,7 +52,17 @@ public class JwtService {
         return  true;
     }
 
-    public String extractUserNameFromToken(String jwt) {
-        return  null;
+    public String extractUserNameFromToken(String token) {
+        return  extractClaim(token, Claims::getSubject);
+    }
+    private boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+    }
+    private Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
+    private <T> T extractClaim(String token, Function<Claims, T> claimsResolvers) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolvers.apply(claims);
     }
 }
