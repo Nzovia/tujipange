@@ -1,9 +1,7 @@
 package com.example.tujipange.userManagement.services;
 
 import com.example.tujipange.security.jwt.JwtService;
-import com.example.tujipange.userManagement.dto.AppUserDto;
-import com.example.tujipange.userManagement.dto.AppUserLoginRequest;
-import com.example.tujipange.userManagement.dto.AuthenticationResponse;
+import com.example.tujipange.userManagement.dto.*;
 import com.example.tujipange.userManagement.models.AppUser;
 import com.example.tujipange.userManagement.repository.AppuserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +9,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * @author Nicholas Nzovia
@@ -37,20 +37,28 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse createAccountUserAccount(AppUserDto signUpRequest) {
-        checkEmailAndPhoneNumberNotTaken(signUpRequest);
+        String errorMessage = "Email or Phone number is already taken";
 
-        AppUser appUser = new AppUser();
-        appUser.setFirstName(signUpRequest.getFirstName());
-        appUser.setLastName(signUpRequest.getLastName());
-        appUser.setPhoneNumber(signUpRequest.getPhoneNumber());
-        appUser.setEmail(signUpRequest.getEmail());
-//        appUser.setRole();
-        appUser.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
+        //check if the email or phone number already exists
+        if(appuserRepository.existsByEmail(signUpRequest.getEmail()) ||
+                appuserRepository.existsByPhoneNumber(signUpRequest.getPhoneNumber())){
+            return AuthenticationResponse.error(errorMessage);
+        }else{
+            AppUser appUser = new AppUser();
+            appUser.setFirstName(signUpRequest.getFirstName());
+            appUser.setLastName(signUpRequest.getLastName());
+            appUser.setPhoneNumber(signUpRequest.getPhoneNumber());
+            appUser.setEmail(signUpRequest.getEmail());
+//        appUser.setRoles();
+            appUser.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
 
-        appuserRepository.save(appUser);
-        String message = "Account Created Successfully";
+            appuserRepository.save(appUser);
+            String message = "Account Created Successfully";
 
-        return AuthenticationResponse.accountSuccess(message);
+            return AuthenticationResponse.accountSuccess(message);
+        }
+
+
     }
 
     @Override
@@ -72,15 +80,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
     }
 
-
-    private void checkEmailAndPhoneNumberNotTaken(AppUserDto appUserDto) {
-
-        //check if the email or phone number already exists
-        if(appuserRepository.existsByEmail(appUserDto.getEmail()) ||
-                appuserRepository.existsByPhoneNumber(appUserDto.getPhoneNumber())){
-
-            //handle the case when email and phoneNumber already exists
-            throw new IllegalArgumentException("Email or Phone number is already taken");
+    @Override
+    public EnableUserResponse enableOrDisableUseService(EnableRequest enableRequest) {
+        Optional<AppUser> appUser = appuserRepository.findByEmail(enableRequest.getEmail());
+        if (appUser.isPresent()){
+            AppUser appUser1;
         }
+        return null;
     }
 }
