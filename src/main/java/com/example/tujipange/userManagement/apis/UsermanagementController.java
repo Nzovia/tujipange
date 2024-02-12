@@ -1,16 +1,12 @@
 package com.example.tujipange.userManagement.apis;
 
-import com.example.tujipange.userManagement.dto.AppUserDto;
-import com.example.tujipange.userManagement.dto.AppUserLoginRequest;
-import com.example.tujipange.userManagement.dto.AuthenticationResponse;
+import com.example.tujipange.userManagement.dto.*;
 import com.example.tujipange.userManagement.services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Nzovia Maundu
@@ -34,12 +30,19 @@ public class UsermanagementController {
         var loginResponse = authenticationService.signIn(loginRequest);
         return ResponseEntity.status(HttpStatus.OK).body(loginResponse);
     }
+    //enable registered users for them to be able to access system
+    @PostMapping("/enable_user")
+//    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<EnableUserResponse> enableOrDisableUserAccount(EnableRequest enableRequest){
+        var enableUserResponse = authenticationService.enableOrDisableUseService(enableRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(enableUserResponse);
+    }
 
-    //todo. get user profile api
+    //Todo. get user profile api
 
-    //todo. update user details api . Only phone number and email can be updated
+    //Todo. update user details api . Only phone number and email can be updated
 
-    //todo. forgot password api
+    //Todo. forgot password api
 
 
 }

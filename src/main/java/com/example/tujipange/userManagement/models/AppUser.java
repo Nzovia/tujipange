@@ -43,6 +43,8 @@ public class AppUser implements UserDetails {
     private Loan loan;
     @OneToMany(mappedBy = "appUser")
     private Set<IndividualContributions> contributions;
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled = false;
 
 
     @Override
@@ -71,7 +73,6 @@ public class AppUser implements UserDetails {
     }
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
-
 }

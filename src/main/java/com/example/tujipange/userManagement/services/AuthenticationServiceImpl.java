@@ -83,9 +83,23 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public EnableUserResponse enableOrDisableUseService(EnableRequest enableRequest) {
         Optional<AppUser> appUser = appuserRepository.findByEmail(enableRequest.getEmail());
-        if (appUser.isPresent()){
-            AppUser appUser1;
+
+        if(appUser.isPresent()){
+            appUser = Optional.of(appUser.get());
+            boolean enabledOrDisabled = appUser.get().isEnabled();
+            if(!enabledOrDisabled){
+                String message = "User Enabled";
+                appUser.get().setEnabled(Boolean.valueOf(enableRequest.getOption()));
+                appuserRepository.save(appUser.get());
+                return EnableUserResponse.enabledUserSuccess(message);
+            }else{
+                String message = "User Disabled";
+                appUser.get().setEnabled(Boolean.valueOf(enableRequest.getOption()));
+                return EnableUserResponse.enabledUserSuccess(message);
+            }
+        }else{
+            return new EnableUserResponse("An error occurred, unable to enable or disable user");
         }
-        return null;
+
     }
 }

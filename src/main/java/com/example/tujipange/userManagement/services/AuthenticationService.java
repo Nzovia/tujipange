@@ -1,8 +1,6 @@
 package com.example.tujipange.userManagement.services;
 
-import com.example.tujipange.userManagement.dto.AppUserDto;
-import com.example.tujipange.userManagement.dto.AppUserLoginRequest;
-import com.example.tujipange.userManagement.dto.AuthenticationResponse;
+import com.example.tujipange.userManagement.dto.*;
 
 /**
  * @author Nicholas Nzovia
@@ -12,5 +10,5 @@ import com.example.tujipange.userManagement.dto.AuthenticationResponse;
 public interface AuthenticationService {
     AuthenticationResponse createAccountUserAccount(AppUserDto signUpRequest);
     AuthenticationResponse signIn(AppUserLoginRequest loginRequest);
-
+    EnableUserResponse enableOrDisableUseService(EnableRequest enableRequest);
 }
