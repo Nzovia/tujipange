@@ -32,7 +32,7 @@ public class UsermanagementController {
     }
     //enable registered users for them to be able to access system
     @PostMapping("/enable_user")
-//    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<EnableUserResponse> enableOrDisableUserAccount(EnableRequest enableRequest){
         var enableUserResponse = authenticationService.enableOrDisableUseService(enableRequest);
         return ResponseEntity.status(HttpStatus.OK).body(enableUserResponse);
@@ -43,6 +43,9 @@ public class UsermanagementController {
     //Todo. update user details api . Only phone number and email can be updated
 
     //Todo. forgot password api
+
+    //Todo. In case there is an existing user records you can import csv and map
+    // them to the database ,two apis needed. Download csv template and import csv with user data
 
 
 }
