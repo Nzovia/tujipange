@@ -11,7 +11,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @SpringBootApplication
 @Slf4j
 public class TujipangeApplication {
-
     public static void main(String[] args) {
 
         SpringApplication.run(TujipangeApplication.class, args);
