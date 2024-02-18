@@ -89,12 +89,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             boolean enabledOrDisabled = appUser.get().isEnabled();
             if(!enabledOrDisabled){
                 String message = "User Enabled";
-                appUser.get().setEnabled(Boolean.valueOf(enableRequest.getOption()));
+                appUser.get().setEnabled(Boolean.parseBoolean(enableRequest.getOption()));
                 appuserRepository.save(appUser.get());
                 return EnableUserResponse.enabledUserSuccess(message);
             }else{
                 String message = "User Disabled";
-                appUser.get().setEnabled(Boolean.valueOf(enableRequest.getOption()));
+                appUser.get().setEnabled(appUser.get().isEnabled());
                 return EnableUserResponse.enabledUserSuccess(message);
             }
         }else{
