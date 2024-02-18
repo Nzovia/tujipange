@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/auth/")
 public class UsermanagementController {
     private final AuthenticationService authenticationService;
+
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> createAccount(@RequestBody AppUserDto appUserDto) {
         var authResponse = authenticationService.createAccountUserAccount(appUserDto);
@@ -30,10 +31,11 @@ public class UsermanagementController {
         var loginResponse = authenticationService.signIn(loginRequest);
         return ResponseEntity.status(HttpStatus.OK).body(loginResponse);
     }
+
     //enable registered users for them to be able to access system
     @PostMapping("/enable_user")
 //    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<EnableUserResponse> enableOrDisableUserAccount(EnableRequest enableRequest){
+    public ResponseEntity<EnableUserResponse> enableOrDisableUserAccount(EnableRequest enableRequest) {
         var enableUserResponse = authenticationService.enableOrDisableUseService(enableRequest);
         return ResponseEntity.status(HttpStatus.OK).body(enableUserResponse);
     }
@@ -46,6 +48,5 @@ public class UsermanagementController {
 
     //Todo. In case there is an existing user records you can import csv and map
     // them to the database ,two apis needed. Download csv template and import csv with user data
-
 
 }
