@@ -1,5 +1,6 @@
 package com.example.tujipange.adminService.dtos;
 
+import com.example.tujipange.userManagement.dto.EnableUserResponse;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -23,4 +24,13 @@ public class ContributionMetricDto {
     private float savingsPercentage;
     private float merryGoRoundPercentage;
     private float penaltyPercentage;
+    
+    private  String errorMessage;
+
+    public ContributionMetricDto(String noActiveMetricRecord) {
+    }
+
+    public static ContributionMetricDto failureMessage(String errorMessage) {
+        return new ContributionMetricDto(errorMessage);
+    }
 }

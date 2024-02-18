@@ -1,7 +1,10 @@
 package com.example.tujipange.adminService.repositories;
 
+import com.example.tujipange.adminService.dtos.ContributionMetricDto;
 import com.example.tujipange.adminService.models.MemberContributionMetric;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
 
 
 /**
@@ -12,4 +15,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberMetricRepository extends JpaRepository<MemberContributionMetric, Long>{
     MemberContributionMetric findByMetricCode(String metricCode);
+
+    Optional<ContributionMetricDto> findByStatus(boolean active);
 }

@@ -5,6 +5,7 @@ import com.example.tujipange.adminService.models.MemberContributionMetric;
 import com.example.tujipange.exceptions.ResourceNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Nicholas Nzovia
@@ -16,5 +17,6 @@ public interface MemberContributionMetricSetUp {
      MemberContributionMetric updateContributionMetric(Long metricCode, ContributionMetricDto contributionMetricDto) throws ResourceNotFoundException;
     String deleteContributionMetric(Long metricId) throws ResourceNotFoundException;
     List<MemberContributionMetric> getAllContributionMetrics();
+    Optional<ContributionMetricDto> getActiveContributionMetric(boolean active);
 
 }

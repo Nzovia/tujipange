@@ -35,5 +35,6 @@ public class MemberContributionMetric {
     private float savingsPercentage;
     private float merryGoRoundPercentage;
     private float penaltyPercentage;
+    private boolean status;
 }
 

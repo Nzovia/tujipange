@@ -55,6 +55,13 @@ public class ContributionMetricsController {
 
 
     //Todo. get active contribution metric by users
+    @GetMapping("{status}")
+    @ApiOperation("Api for listing all Group contribution metric")
+    public ResponseEntity<?> getActiveContributionMetric(@PathVariable(value = "status") boolean status){
+        return new ResponseEntity<>(memberContributionMetricSetUp.getActiveContributionMetric(status), HttpStatus.OK);
+    }
+
+    //Todo. activate contribution metric, note only one record in the metrics can be active at a time
 
 
 

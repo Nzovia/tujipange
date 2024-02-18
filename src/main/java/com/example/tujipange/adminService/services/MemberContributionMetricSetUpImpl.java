@@ -11,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Nicholas Nzovia
@@ -68,7 +69,7 @@ public class MemberContributionMetricSetUpImpl implements MemberContributionMetr
 
     @Override
     public String deleteContributionMetric(Long metricId) throws ResourceNotFoundException {
-        String deletionMessage = "";
+        String deletionMessage = "Record deleted successfully";
         try {
             MemberContributionMetric memberContributionMetric = memberMetricRepository.findById(metricId)
                     .orElseThrow(() -> new ResourceNotFoundException("Referenced Metric not found: " + metricId));
@@ -83,4 +84,22 @@ public class MemberContributionMetricSetUpImpl implements MemberContributionMetr
     public List<MemberContributionMetric> getAllContributionMetrics() {
         return memberMetricRepository.findAll();
     }
+
+    @Override
+    public Optional<ContributionMetricDto> getActiveContributionMetric(boolean active) {
+        try{
+            Optional<ContributionMetricDto> contributionMetricDto = memberMetricRepository.findByStatus(active);
+
+            if(contributionMetricDto.isPresent()){
+                return contributionMetricDto;
+            }else{
+                return Optional.of(new ContributionMetricDto("No active metric record"));
+            }
+        }catch (Exception exception){
+            return Optional.of(new ContributionMetricDto("Error occurred: "+ exception.getMessage()));
+        }
+
+    }
+
+
 }
