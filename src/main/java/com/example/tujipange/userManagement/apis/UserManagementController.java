@@ -5,7 +5,6 @@ import com.example.tujipange.userManagement.services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth/")
-public class UsermanagementController {
+public class UserManagementController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
@@ -40,13 +39,9 @@ public class UsermanagementController {
         return ResponseEntity.status(HttpStatus.OK).body(enableUserResponse);
     }
 
-    //Todo. get user profile api: Done
-
-    //Todo. update user details api . Only phone number and email can be updated : Done
-
-    //Todo. forgot password api
+    //Todo. forgot password api -> ensure it is under userManagementController
 
     //Todo. In case there is an existing user records you can import csv and map
-    // them to the database ,two apis needed. Download csv template and import csv with user data
+    // them to the database ,two apis needed. Download csv template and import csv with user data -> ensure it is under userManagementController
 
 }
